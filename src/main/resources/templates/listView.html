@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.8/css/bootstrap.min.css}" />
+</head>
+<body class="p-3">
+    <div class="container">
+    <h1 class="mb-3">Lista de Cursos</h1>
+
+    <div class="d-flex gap-2">
+        <form method="post" action="#" th:action="@{/findByName}" th:object="${findForm}">
+            <label>Buscar por nombre:<input type="text" name="nombre" th:field="*{nombre}"/></label>
+            <input type="submit" value="Buscar"/>
+        </form>
+        <a th:href="@{/list}" class="btn btn-secondary">Reestablecer</a>
+    </div>
+
+    <form method="post" action="#" th:action="@{/findByTheme}" th:object="${findTheme}">
+        <label>Buscar por temática</label>
+        <select name="tematica" th:field="*{tematica}">
+            <option th:each="tema : ${T(com.example.ejercicio601.domain.Tematica).values()}" 
+                    th:value="${tema}" 
+                    th:text="${tema}"></option>
+        </select>
+        <input type="submit" value="Buscar"/>
+    </form>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Precio</th>
+                <th>Tematica</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="curso : ${listaCursos}">
+                <td th:text="${curso.id}">ID</td>
+                <td><a th:href="@{/{id}(id=${curso.id})}" th:text="${curso.nombre}"></a></td>
+                <td th:text="${curso.precio}">Precio</td>
+                <td th:text="${curso.tematica}">Tematica</td>
+                <td>
+                    <a th:href="@{/editar/{id}(id=${curso.id})}" class="btn btn-primary btn-sm">Editar</a>
+                    <a th:href="@{/borrar/{id}(id=${curso.id})}" class="btn btn-outline-danger btn-sm ms-2">Borrar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <p th:if="${msg!=null}" class="alert alert-info" role="alert"><span th:text="${msg}">err</span></p>
+    <a th:href="@{/nuevo}" class="btn btn-success">Nuevo Curso</a>
+
+    <div class="d-flex gap-2">
+        <form method="post" action="#" th:action="@{/findByPrice}" th:object="${findPrice}">
+            <label>Buscar por precio menor a: <input type="number" name="precio" th:field="*{precio}"/></label>
+            <input type="submit" value="Buscar"/>
+        </form>
+    </div>
+    
+    </div>
+    <script th:src="@{/webjars/bootstrap/5.3.8/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>
