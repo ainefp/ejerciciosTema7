@@ -12,7 +12,6 @@
                     <th>Nombre</th>
                     <th>Email</th>
                     <th>Cursos</th>
-                    <th>Costo Total Cursos</th>
                     <th>Limite de Costes</th>
                 </tr>
             </thead>
@@ -26,7 +25,6 @@
                             <li th:each="curso : ${autor.cursos}"><a th:href="@{/{id}(id=${curso.id})}" th:text="${curso.nombre}"></a></li>
                         </ul>
                     </td>
-                    <td th:text="${autor.costoTotalCursos}">Costo Total Cursos</td>
                     <td th:text="${autor.limiteCostoTotalCursos}">Limite de Costes</td>
                 </tr>
             </tbody>
