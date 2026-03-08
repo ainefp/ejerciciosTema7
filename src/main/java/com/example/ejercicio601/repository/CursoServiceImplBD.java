@@ -65,7 +65,7 @@ public class CursoServiceImplBD implements CursoService {
         Double limiteCosteTotal = curso.getAutor().getLimiteCostoTotalCursos();
         
         if (costeTotal + curso.getPrecio() > limiteCosteTotal) {
-            throw new RuntimeException("El coste total de los cursos de este autor no puede superar los " + limiteCosteTotal);
+            throw new RuntimeException("El coste total de los cursos de " + curso.getAutor().getNombre() + " no puede superar los " + limiteCosteTotal);
         }
     }
 }
