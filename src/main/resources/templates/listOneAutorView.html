@@ -16,13 +16,19 @@
                     <th>ID</th>
                     <th>Nombre</th>
                     <th>Email</th>
+                    <th>Cursos</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="align-middle">
                 <tr>
                     <td th:text="${autor.id}">ID</td>
                     <td th:text="${autor.nombre}">Nombre</td>
                     <td th:text="${autor.email}">Email</td>
+                    <td>
+                        <ul class="ps-0 mb-0 list-unstyled">
+                            <li th:each="curso : ${autor.cursos}"><a th:href="@{/{id}(id=${curso.id})}" th:text="${curso.nombre}"></a></li>
+                        </ul>
+                    </td>
                 </tr>
             </tbody>
         </table>

@@ -1,14 +1,17 @@
 package com.example.ejercicio601.domain;
 
-import lombok.Data;
+import java.util.List;
+
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 
@@ -30,4 +33,7 @@ public class Autor {
     @Email
     @NotEmpty
     private String email;
+
+    @OneToMany(mappedBy = "autor")
+    private List<Curso> cursos;
 }

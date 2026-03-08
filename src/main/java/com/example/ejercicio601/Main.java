@@ -1,5 +1,6 @@
 package com.example.ejercicio601;
 
+import org.hibernate.mapping.List;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -22,13 +23,12 @@ public class Main {
 	@Bean
 	CommandLineRunner initData(CursoService cursoService, AutorRepository autorRepository) {
 		return args -> {
-			Autor aine = autorRepository.save(new Autor(null, "Ainé Figueroa", "ainefigueroa@gmail.com"));
-			Autor juan = autorRepository.save(new Autor(null, "Juan Pérez", "juanperez@gmail.com"));
-			Autor maria = autorRepository.save(new Autor(null, "María García", "mariagarcia@gmail.com"));
+			Autor aine = autorRepository.save(new Autor(null, "Ainé Figueroa", "ainefigueroa@gmail.com", null));
+			Autor juan = autorRepository.save(new Autor(null, "Juan Pérez", "juanperez@gmail.com", null));
 
 			cursoService.añadir(new Curso(null, "Programación", 50.0, Tematica.PROGRAMACION, aine));
-			cursoService.añadir(new Curso(null, "Redes Locales", 75.0, Tematica.REDES, juan));
-			cursoService.añadir(new Curso(null, "Sistemas Informáticos", 60.0, Tematica.SISTEMAS, maria));
+			cursoService.añadir(new Curso(null, "Redes Locales", 75.0, Tematica.REDES, aine));
+			cursoService.añadir(new Curso(null, "Sistemas Informáticos", 60.0, Tematica.SISTEMAS, juan));
 		};
 	}
 
