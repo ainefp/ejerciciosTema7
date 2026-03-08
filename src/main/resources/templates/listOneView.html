@@ -23,9 +23,9 @@
             <tbody>
                 <tr th:each="cur : ${curso}">
                     <td th:text="${cur.id}">ID</td>
-                    <td><a th:href="@{/{id}(id=${cur.id})}" th:text="${cur.nombre}"></a></td>
+                    <td><a th:href="@{/{id}(id=${cur.id})}" th:text="${cur.nombre}">Nombre</a></td>
                     <td th:text="${cur.precio}">Precio</td>
-                    <td th:text="${cur.autor.nombre}">Autor</td>
+                    <td><a th:href="@{/autores/{id}(id=${cur.autor.id})}" th:text="${cur.autor.nombre}">Autor</a></td>
                     <td th:text="${cur.tematica}">Tematica</td>
                 </tr>
             </tbody>
