@@ -14,6 +14,10 @@
                 <label for="email" class="form-label">Email</label>
                 <input type="email" class="form-control" id="email" th:field="*{email}" />
             </div>
+            <div class="col-12 col-md-6">
+                <label for="limiteCostoTotalCursos" class="form-label">Límite de coste total</label>
+                <input type="number" step="0.01" min="0" class="form-control" id="limiteCostoTotalCursos" th:field="*{limiteCostoTotalCursos}" />
+            </div>
             <div class="col-12">
                 <button type="submit" class="btn btn-success">Guardar</button>
                 <a th:href="@{/autores}" class="btn btn-secondary ms-2">Cancelar</a>
