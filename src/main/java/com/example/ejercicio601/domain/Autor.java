@@ -1,16 +1,15 @@
 package com.example.ejercicio601.domain;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import lombok.EqualsAndHashCode;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 
 
@@ -20,18 +19,15 @@ import jakarta.validation.constraints.NotEmpty;
 @EqualsAndHashCode(of = "id")
 
 @Entity
-public class Curso {
+public class Autor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotEmpty
     private String nombre;
-    
-    private Double precio;
-    private Tematica tematica;
 
-    @ManyToOne
-    @JoinColumn(name = "autor_id")
-    private Autor autor;
+    @Email
+    @NotEmpty
+    private String email;
 }

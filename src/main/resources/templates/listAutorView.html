@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Autores</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.8/css/bootstrap.min.css}" />
+</head>
+<body class="p-3">
+    <div class="container">
+        <div th:replace="~{listView :: menu}"></div>
+        <h1 class="mb-3">Lista de Autores</h1>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Email</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="autor : ${listaAutores}">
+                    <td th:text="${autor.id}">ID</td>
+                    <td><a th:href="@{/autores/{id}(id=${autor.id})}" th:text="${autor.nombre}"></a></td>
+                    <td th:text="${autor.email}">Email</td>
+                    <td>
+                        <a th:href="@{/autores/editar/{id}(id=${autor.id})}" class="btn btn-primary btn-sm">Editar</a>
+                        <a th:href="@{/autores/borrar/{id}(id=${autor.id})}" class="btn btn-outline-danger btn-sm ms-2">Borrar</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p th:if="${msg != null}" class="alert alert-info" role="alert">
+            <span th:text="${msg}"></span>
+        </p>
+
+        <div class="d-flex gap-2">
+            <a th:href="@{/autores/nuevo}" class="btn btn-success">Nuevo Autor</a>
+        </div>
+    </div>
+    <script th:src="@{/webjars/bootstrap/5.3.8/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

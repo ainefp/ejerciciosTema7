@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuevo Autor</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.8/css/bootstrap.min.css}" />
+</head>
+<body class="p-3">
+    <div class="container">
+        <div th:replace="~{listView :: menu}"></div>
+        <h1 class="mb-3">Nuevo Autor</h1>
+        <form method="post" action="#" th:action="@{/autores/nuevo/submit}" th:object="${autor}" class="row g-3">
+            <div class="col-12 col-md-6">
+                <label for="nombre" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="nombre" th:field="*{nombre}" />
+            </div>
+            <div class="col-12 col-md-6">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" th:field="*{email}" />
+            </div>
+            <div class="col-12">
+                <button type="submit" class="btn btn-success">Guardar</button>
+                <a th:href="@{/autores}" class="btn btn-secondary ms-2">Cancelar</a>
+            </div>
+        </form>
+    </div>
+    <script th:src="@{/webjars/bootstrap/5.3.8/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

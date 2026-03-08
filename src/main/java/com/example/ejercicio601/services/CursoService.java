@@ -14,4 +14,5 @@ public interface CursoService {
     List<Curso> buscarPorNombre(String textoNombre);
     List<Curso> buscarPorTematica(Tematica textoTematica);
     List<Curso> buscarPorPrecioMenor(Double precio);
+    List<Curso> buscarPorAutor(Long autorId);
 }

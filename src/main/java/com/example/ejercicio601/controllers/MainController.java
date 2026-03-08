@@ -7,8 +7,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.example.ejercicio601.domain.Autor;
 import com.example.ejercicio601.domain.Curso;
 import com.example.ejercicio601.services.CursoService;
+import com.example.ejercicio601.services.AutorService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -18,6 +20,7 @@ import lombok.RequiredArgsConstructor;
 public class MainController {
 
     private final CursoService cursoService;
+    private final AutorService autorService;
     private String txtMsg;
 
     @GetMapping({"/", "/list"})
@@ -33,6 +36,8 @@ public class MainController {
         model.addAttribute("findForm", new Curso());
         model.addAttribute("findTheme", new Curso());
         model.addAttribute("findPrice", new Curso());
+        model.addAttribute("findAutor", new Autor());
+        model.addAttribute("listaAutores", autorService.obtenerTodos());
         return "listView";
     }
 
@@ -95,30 +100,45 @@ public class MainController {
     @PostMapping("/findByName")
     public String findName(Curso curso, Model model) {
         model.addAttribute("listaCursos", cursoService.buscarPorNombre(curso.getNombre()));
+        model.addAttribute("listaAutores", autorService.obtenerTodos());
         model.addAttribute("findForm", curso);
         model.addAttribute("findTheme", new Curso());
         model.addAttribute("findPrice", new Curso());
-        return "listView";
-    }
-
-    @PostMapping("/findByPrice")
-    public String findPrice(Curso curso, Model model) {
-        model.addAttribute("listaCursos", cursoService.buscarPorPrecioMenor(curso.getPrecio()));
-        model.addAttribute("findPrice", curso);
-        model.addAttribute("findForm", new Curso());
-        model.addAttribute("findTheme", new Curso());
+        model.addAttribute("findAutor", new Autor());
         return "listView";
     }
     
     @PostMapping("/findByTheme")
     public String findTheme(Curso curso, Model model) {
         model.addAttribute("listaCursos", cursoService.buscarPorTematica(curso.getTematica()));
+        model.addAttribute("listaAutores", autorService.obtenerTodos());
         model.addAttribute("findTheme", curso);
         model.addAttribute("findForm", new Curso());
+        model.addAttribute("findPrice", new Curso());
+        model.addAttribute("findAutor", new Autor());
+        return "listView";
+    }
+
+    @PostMapping("/findByAutor")
+    public String findAutor(Autor autor, Model model) {
+        model.addAttribute("listaCursos", cursoService.buscarPorAutor(autor.getId()));
+        model.addAttribute("listaAutores", autorService.obtenerTodos());
+        model.addAttribute("findAutor", autor);
+        model.addAttribute("findForm", new Curso());
+        model.addAttribute("findTheme", new Curso());
         model.addAttribute("findPrice", new Curso());
         return "listView";
     }
     
-    
+    @PostMapping("/findByPrice")
+    public String findPrice(Curso curso, Model model) {
+        model.addAttribute("listaCursos", cursoService.buscarPorPrecioMenor(curso.getPrecio()));
+        model.addAttribute("listaAutores", autorService.obtenerTodos());
+        model.addAttribute("findPrice", curso);
+        model.addAttribute("findForm", new Curso());
+        model.addAttribute("findTheme", new Curso());
+        model.addAttribute("findAutor", new Autor());
+        return "listView";
+    }
 
 }

@@ -28,11 +28,11 @@ public class CursoServiceImplBD implements CursoService {
         return cursoRepository.findById(id).orElseThrow(() -> new RuntimeException("Curso no encontrado con este id: " + id));
     }
 
-    public Curso editar(Curso curso) throws RuntimeException {
+    public Curso editar(Curso curso) {
         return cursoRepository.save(curso);
     }
 
-    public void borrar(Long id) throws RuntimeException {
+    public void borrar(Long id) {
         obtenerPorId(id);
         cursoRepository.deleteById(id);
     }
@@ -51,5 +51,9 @@ public class CursoServiceImplBD implements CursoService {
 
     public List<Curso> buscarPorPrecioMenor(Double precio) {
         return cursoRepository.findByPrecioLessThanEqualOrderByPrecio(precio);
+    }
+
+    public List<Curso> buscarPorAutor(Long autorId) {
+        return cursoRepository.findByAutorId(autorId);
     }
 }

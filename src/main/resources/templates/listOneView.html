@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,12 +9,14 @@
 </head>
 <body class="p-3">
     <div class="container">
+        <div th:replace="~{listView :: menu}"></div>
         <table class="table table-striped">
             <thead>
                 <tr>
                     <th>ID</th>
                     <th>Nombre</th>
                     <th>Precio</th>
+                    <th>Autor</th>
                     <th>Tematica</th>
                 </tr>
             </thead>
@@ -23,6 +25,7 @@
                     <td th:text="${cur.id}">ID</td>
                     <td><a th:href="@{/{id}(id=${cur.id})}" th:text="${cur.nombre}"></a></td>
                     <td th:text="${cur.precio}">Precio</td>
+                    <td th:text="${cur.autor.nombre}">Autor</td>
                     <td th:text="${cur.tematica}">Tematica</td>
                 </tr>
             </tbody>

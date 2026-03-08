@@ -8,8 +8,17 @@
 </head>
 <body class="p-3">
     <div class="container">
+    <!-- MENÚ DE NAVEGACIÓN -->
+    <nav th:fragment="menu" class="navbar navbar-dark bg-dark navbar-expand-sm">
+        <ul class="navbar-nav">
+            <li><a class="nav-link active" th:href="@{/}">Cursos</a></li>
+            <li><a class="nav-link active" th:href="@{/autores/}">Autores</a></li>
+        </ul>
+    </nav>
+
     <h1 class="mb-3">Lista de Cursos</h1>
 
+    <!-- BUSCAR POR NOMBRE -->
     <div class="d-flex gap-2">
         <form method="post" action="#" th:action="@{/findByName}" th:object="${findForm}">
             <label>Buscar por nombre:<input type="text" name="nombre" th:field="*{nombre}"/></label>
@@ -18,6 +27,7 @@
         <a th:href="@{/list}" class="btn btn-secondary">Reestablecer</a>
     </div>
 
+    <!-- BUSCAR POR TEMÁTICA -->
     <form method="post" action="#" th:action="@{/findByTheme}" th:object="${findTheme}">
         <label>Buscar por temática</label>
         <select name="tematica" th:field="*{tematica}">
@@ -28,12 +38,25 @@
         <input type="submit" value="Buscar"/>
     </form>
 
+    <!-- BUSCAR POR AUTOR -->
+    <form method="post" action="#" th:action="@{/findByAutor}" th:object="${findAutor}">
+        <label>Buscar por autor</label>
+        <select name="id" th:field="*{id}">
+            <option th:each="autor : ${listaAutores}" 
+                    th:value="${autor.id}" 
+                    th:text="${autor.nombre}"></option>
+        </select>
+        <input type="submit" value="Buscar"/>
+    </form>
+
+    <!-- LISTA DE CURSOS -->
     <table class="table table-striped">
         <thead>
             <tr>
                 <th>ID</th>
                 <th>Nombre</th>
                 <th>Precio</th>
+                <th>Autor</th>
                 <th>Tematica</th>
                 <th>Acciones</th>
             </tr>
@@ -43,6 +66,7 @@
                 <td th:text="${curso.id}">ID</td>
                 <td><a th:href="@{/{id}(id=${curso.id})}" th:text="${curso.nombre}"></a></td>
                 <td th:text="${curso.precio}">Precio</td>
+                <td th:text="${curso.autor.nombre}">Autor</td>
                 <td th:text="${curso.tematica}">Tematica</td>
                 <td>
                     <a th:href="@{/editar/{id}(id=${curso.id})}" class="btn btn-primary btn-sm">Editar</a>
@@ -51,9 +75,14 @@
             </tr>
         </tbody>
     </table>
+
+    <!-- MENSAJE DE ERROR -->
     <p th:if="${msg!=null}" class="alert alert-info" role="alert"><span th:text="${msg}">err</span></p>
+    
+    <!-- NUEVO CURSO -->
     <a th:href="@{/nuevo}" class="btn btn-success">Nuevo Curso</a>
 
+    <!-- BUSCAR POR PRECIO MENOR A -->
     <div class="d-flex gap-2">
         <form method="post" action="#" th:action="@{/findByPrice}" th:object="${findPrice}">
             <label>Buscar por precio menor a: <input type="number" name="precio" th:field="*{precio}"/></label>
