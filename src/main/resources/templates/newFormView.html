@@ -44,6 +44,16 @@
         </div>
 
         <div class="col-12">
+          <label for="autorId" class="form-label">Autor</label>
+          <select name="autorId" id="autorId" class="form-select">
+            <option value="">-- Sin autor --</option>
+            <option th:each="a : ${listaAutores}"
+                    th:value="${a.id}"
+                    th:text="${a.nombre}"></option>
+          </select>
+        </div>
+
+        <div class="col-12">
           <label class="form-label d-block">Temática</label>
           <div
             class="form-check form-check-inline"

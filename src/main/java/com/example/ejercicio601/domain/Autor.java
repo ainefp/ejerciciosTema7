@@ -16,6 +16,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 
 
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -36,4 +37,8 @@ public class Autor {
 
     @OneToMany(mappedBy = "autor")
     private List<Curso> cursos;
+
+    private Double costoTotalCursos;
+
+    private Double limiteCostoTotalCursos;
 }

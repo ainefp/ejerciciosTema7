@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.ejercicio601.domain.Autor;
 import com.example.ejercicio601.domain.Curso;
@@ -59,19 +60,19 @@ public class MainController {
     public String showNew(Model model) {
         try {
             model.addAttribute("curso", new Curso());
+            model.addAttribute("listaAutores", autorService.obtenerTodos());
             return "newFormView";
         } catch(RuntimeException e) {
             txtMsg = e.getMessage();
             return "redirect:/list";
-
         }
-
     }
 
     @GetMapping("/editar/{id}")
     public String edit(@PathVariable Long id, Model model) {
         Curso curso = cursoService.obtenerPorId(id);
-        model.addAttribute("curso",curso);
+        model.addAttribute("curso", curso);
+        model.addAttribute("listaAutores", autorService.obtenerTodos());
         return "editFormView";
     }
 
@@ -83,15 +84,20 @@ public class MainController {
     }
 
     @PostMapping("/nuevo/submit")
-    public String submitForm(@ModelAttribute Curso curso) {
+    public String submitForm(@ModelAttribute Curso curso, @RequestParam(required = false) Long autorId) {
+        if (autorId != null) {
+            curso.setAutor(autorService.obtenerPorId(autorId));
+        }
         cursoService.añadir(curso);
         txtMsg = "Curso añadido correctamente";
         return "redirect:/list";
-        
     }
     
     @PostMapping("/editar/submit")
-    public String submitEdit(@ModelAttribute Curso curso) {
+    public String submitEdit(@ModelAttribute Curso curso, @RequestParam(required = false) Long autorId) {
+        if (autorId != null) {
+            curso.setAutor(autorService.obtenerPorId(autorId));
+        }
         cursoService.editar(curso);
         txtMsg = "Curso editado correctamente";
         return "redirect:/list";

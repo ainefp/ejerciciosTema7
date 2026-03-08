@@ -35,7 +35,4 @@ public class AutorServiceImplBD implements AutorService {
         autorRepository.deleteById(id);
     }
 
-    public List<Autor> obtenerPorNombre(String nombre) {
-        return autorRepository.findByNombre(nombre);
-    }
 }

@@ -10,5 +10,4 @@ public interface AutorService {
     Autor obtenerPorId(Long id);
     Autor editar(Autor autor);
     void borrar(Long id);
-    List<Autor> obtenerPorNombre(String nombre);
 }

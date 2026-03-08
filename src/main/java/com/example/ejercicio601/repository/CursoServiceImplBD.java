@@ -16,6 +16,7 @@ public class CursoServiceImplBD implements CursoService {
     private CursoRepository cursoRepository;
     
     public Curso añadir(Curso curso) {
+        validarLimiteCoste(curso);
         return cursoRepository.save(curso);
     }
     
@@ -29,6 +30,7 @@ public class CursoServiceImplBD implements CursoService {
     }
 
     public Curso editar(Curso curso) {
+        validarLimiteCoste(curso);
         return cursoRepository.save(curso);
     }
 
@@ -55,5 +57,15 @@ public class CursoServiceImplBD implements CursoService {
 
     public List<Curso> buscarPorAutor(Long autorId) {
         return cursoRepository.findByAutorId(autorId);
+    }
+
+    private void validarLimiteCoste(Curso curso) throws RuntimeException {
+        Long idAutor = curso.getAutor().getId();
+        Double costeTotal = cursoRepository.obtenerSumaCostesPorAutor(idAutor);
+        Double limiteCosteTotal = curso.getAutor().getLimiteCostoTotalCursos();
+        
+        if (costeTotal + curso.getPrecio() > limiteCosteTotal) {
+            throw new RuntimeException("El coste total de los cursos de este autor no puede superar los " + limiteCosteTotal);
+        }
     }
 }
