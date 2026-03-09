@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{listView :: head}"></head>
+<head th:replace="~{Curso/listCursoView :: head}"></head>
 <body class="p-3">
     <div class="container">
-        <div th:replace="~{listView :: menu}"></div>
+        <div th:replace="~{Curso/listCursoView :: menu}"></div>
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -12,6 +12,7 @@
                     <th>Precio</th>
                     <th>Autor</th>
                     <th>Tematica</th>
+                    <th>Vídeos Asociados</th>
                 </tr>
             </thead>
             <tbody>
@@ -21,6 +22,12 @@
                     <td th:text="${cur.precio}">Precio</td>
                     <td><a th:href="@{/autores/{id}(id=${cur.autor.id})}" th:text="${cur.autor.nombre}">Autor</a></td>
                     <td th:text="${cur.tematica}">Tematica</td>
+                    <td>
+                        <ul class="ps-0 mb-0">
+                            <li th:each="video : ${cur.videos}"><a th:href="@{/videos/{id}(id=${video.id})}" th:text="${video.descripcion}"></a></li>
+                        </ul>
+                        <!-- list-unstyled -->
+                    </td>
                 </tr>
             </tbody>
         </table>

@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.ejercicio601.domain.Autor;
 import com.example.ejercicio601.domain.Curso;
-import com.example.ejercicio601.services.AutorService;
-import com.example.ejercicio601.services.CursoService;
+import com.example.ejercicio601.services.Autor.AutorService;
+import com.example.ejercicio601.services.Curso.CursoService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -54,7 +54,7 @@ public class MainController {
         model.addAttribute("findTheme", new Curso());
         model.addAttribute("findPrice", new Curso());
         model.addAttribute("findAutor", new Autor());
-        return "listView";
+        return "Curso/listCursoView";
     }
 
     @GetMapping("/{id}")
@@ -68,14 +68,14 @@ public class MainController {
             return "redirect:/list";
         }
 
-        return "listOneView";
+        return "Curso/listOneCursoView";
     }
 
     @GetMapping("/nuevo")
     public String showNew(Model model) {
         try {
             model.addAttribute("curso", new Curso());
-            return "newFormView";
+            return "Curso/newCursoFormView";
         } catch (RuntimeException e) {
             errMsg = e.getMessage();
             return "redirect:/list";
@@ -86,7 +86,7 @@ public class MainController {
     public String edit(@PathVariable Long id, Model model) {
         Curso curso = cursoService.obtenerPorId(id);
         model.addAttribute("curso", curso);
-        return "editFormView";
+        return "Curso/editCursoFormView";
     }
 
     @GetMapping("/borrar/{id}")
@@ -105,7 +105,7 @@ public class MainController {
             cursoService.añadir(curso);
         } catch (RuntimeException e) {
             model.addAttribute("errorMsg", e.getMessage());
-            return "newFormView";
+            return "Curso/newCursoFormView";
         }
         errMsg = "Curso añadido correctamente";
         return "redirect:/list";
@@ -120,7 +120,7 @@ public class MainController {
             cursoService.editar(curso);
         } catch (RuntimeException e) {
             model.addAttribute("errorMsg", e.getMessage());
-            return "editFormView";
+            return "Curso/editCursoFormView";
         }
         errMsg = "Curso editado correctamente";
         return "redirect:/list";
@@ -132,7 +132,7 @@ public class MainController {
         model.addAttribute("findTheme", new Curso());
         model.addAttribute("findPrice", new Curso());
         model.addAttribute("findAutor", new Autor());
-        return "listView";
+        return "Curso/listCursoView";
     }
 
     @PostMapping("/findByTheme")
@@ -141,7 +141,7 @@ public class MainController {
         model.addAttribute("findForm", new Curso());
         model.addAttribute("findPrice", new Curso());
         model.addAttribute("findAutor", new Autor());
-        return "listView";
+        return "Curso/listCursoView";
     }
 
     @PostMapping("/findByAutor")
@@ -150,7 +150,7 @@ public class MainController {
         model.addAttribute("findForm", new Curso());
         model.addAttribute("findTheme", new Curso());
         model.addAttribute("findPrice", new Curso());
-        return "listView";
+        return "Curso/listCursoView";
     }
 
     @PostMapping("/findByPrice")
@@ -159,7 +159,7 @@ public class MainController {
         model.addAttribute("findForm", new Curso());
         model.addAttribute("findTheme", new Curso());
         model.addAttribute("findAutor", new Autor());
-        return "listView";
+        return "Curso/listCursoView";
     }
 
 }

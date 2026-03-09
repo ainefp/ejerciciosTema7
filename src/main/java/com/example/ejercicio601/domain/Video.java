@@ -1,20 +1,16 @@
 package com.example.ejercicio601.domain;
 
-import java.util.List;
-
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 
 @Data
@@ -23,21 +19,17 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(of = "id")
 
 @Entity
-public class Curso {
+public class Video {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotEmpty
-    private String nombre;
-    
-    private Double precio;
-    private Tematica tematica;
+    private String descripcion;
+    private Integer duracionSegundos;
+    private Long idYoutube;
 
+    @ToString.Exclude
     @ManyToOne
-    @JoinColumn(name = "autor_id")
-    private Autor autor;
-
-    @OneToMany(mappedBy = "curso", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Video> videos;
+    @JoinColumn(name = "curso_id")
+    private Curso curso;
 }

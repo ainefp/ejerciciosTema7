@@ -1,4 +1,4 @@
-package com.example.ejercicio601.services;
+package com.example.ejercicio601.services.Curso;
 
 import java.util.List;
 
@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.ejercicio601.domain.Curso;
 import com.example.ejercicio601.domain.Tematica;
+import com.example.ejercicio601.domain.Video;
 import com.example.ejercicio601.repository.CursoRepository;
 
 

@@ -1,15 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{listView :: head}"></head>
+<head th:replace="~{Curso/listCursoView :: head}"></head>
 <body class="p-3">
     <div class="container">
-        <div th:replace="~{listView :: menu}"></div>
+        <div th:replace="~{Curso/listCursoView :: menu}"></div>
         <h1 class="mb-3">Editar Autor</h1>
         <form method="post" action="#" th:action="@{/autores/editar/submit}" th:object="${autor}" class="row g-3">
-            <!-- <div class="col-12 col-md-2">
-                <label for="id" class="form-label">ID</label>
-                <input type="number" class="form-control" id="id" th:field="*{id}" readonly />
-            </div> -->
             <div class="col-12 col-md-6">
                 <label for="nombre" class="form-label">Nombre</label>
                 <input type="text" class="form-control" id="nombre" th:field="*{nombre}" />

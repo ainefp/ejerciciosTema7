@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{Curso/listCursoView :: head}"></head>
+<body class="p-3">
+    <div class="container">
+        <div th:replace="~{Curso/listCursoView :: menu}"></div>
+
+        <h1 class="mb-3">Editar Video</h1>
+        <form method="post" action="#" th:action="@{/videos/editar/submit}" th:object="${video}" class="row g-3">
+            <div class="col-12 col-md-6">
+                <label for="descripcion" class="form-label">Descripción</label>
+                <input type="text" class="form-control" id="descripcion" th:field="*{descripcion}" />
+            </div>
+            <div class="col-12 col-md-6">
+                <label for="duracionSegundos" class="form-label">Duración (Segundos)</label>
+                <input type="number" step="1" min="0" class="form-control" id="duracionSegundos" th:field="*{duracionSegundos}" />
+            </div>
+            <div class="col-12 col-md-6">
+                <label for="idYoutube" class="form-label">ID de YouTube</label>
+                <input type="text" class="form-control" id="idYoutube" th:field="*{idYoutube}" />
+            </div>
+            <!-- <div class="col-12">
+                <label for="cursoId" class="form-label">Curso</label>
+                <select name="cursoId" id="cursoId" class="form-select">
+                    <option value="">-- Sin curso --</option>
+                    <option th:each="c : ${listaCursos}" th:value="${c.id}" th:selected="${video.curso != null && video.curso.id == c.id}" th:text="${c.nombre}"></option>
+                </select>
+            </div> -->
+
+            <div class="col-12">
+                <button type="submit" class="btn btn-success">Guardar cambios</button>
+                <a th:href="@{/videos}" class="btn btn-secondary ms-2">Cancelar</a>
+            </div>
+        </form>
+    </div>
+    <script th:src="@{/webjars/bootstrap/5.3.8/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>
