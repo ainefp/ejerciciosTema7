@@ -32,20 +32,20 @@ public class Main {
 			// Crear Cursos + Crear Videos
 			Curso programacion = new Curso(null, "Programación", 50.0, Tematica.PROGRAMACION, aine, null);
 			programacion.setVideos(List.of(
-				new Video(null, "Introducción a la Programación", 30000, 4523L, programacion),
-				new Video(null, "Programación Orientada a Objetos", 45000, 4524L, programacion),
-				new Video(null, "Java Avanzado", 40000, 4524L, programacion)
+				new Video(null, "Introducción a la Programación", 30000, "nLJhIpKNOSo", programacion),
+				new Video(null, "Programación Orientada a Objetos", 45000, "nLJhIpKNOSo", programacion),
+				new Video(null, "Java Avanzado", 40000, "nLJhIpKNOSo", programacion)
 			));
 			
 			Curso redes = new Curso(null, "Redes Locales", 75.0, Tematica.REDES, aine, null);
 			redes.setVideos(List.of(
-				new Video(null, "Redes Locales Básicas", 15000, 4524L, redes),
-				new Video(null, "DNS y DHCP", 25000, 4525L, redes)
+				new Video(null, "Redes Locales Básicas", 15000, "nLJhIpKNOSo", redes),
+				new Video(null, "DNS y DHCP", 25000, "nLJhIpKNOSo", redes)
 			));
 
 			Curso sistemas = new Curso(null, "Sistemas Informáticos", 60.0, Tematica.SISTEMAS, juan, null);
 			sistemas.setVideos(List.of(
-				new Video(null, "Sistemas Informáticos para Principiantes", 20000, 4525L, sistemas)
+				new Video(null, "Sistemas Informáticos para Principiantes", 20000, "nLJhIpKNOSo", sistemas)
 			));
 
 			// Añadir Cursos
