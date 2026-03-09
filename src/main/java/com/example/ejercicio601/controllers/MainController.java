@@ -97,21 +97,31 @@ public class MainController {
     }
 
     @PostMapping("/nuevo/submit")
-    public String submitForm(@ModelAttribute Curso curso, @RequestParam(required = false) Long autorId) {
+    public String submitForm(@ModelAttribute Curso curso, @RequestParam(required = false) Long autorId, Model model) {
         if (autorId != null) {
             curso.setAutor(autorService.obtenerPorId(autorId));
         }
-        cursoService.añadir(curso);
+        try {
+            cursoService.añadir(curso);
+        } catch (RuntimeException e) {
+            model.addAttribute("errorMsg", e.getMessage());
+            return "newFormView";
+        }
         errMsg = "Curso añadido correctamente";
         return "redirect:/list";
     }
 
     @PostMapping("/editar/submit")
-    public String submitEdit(@ModelAttribute Curso curso, @RequestParam(required = false) Long autorId) {
+    public String submitEdit(@ModelAttribute Curso curso, @RequestParam(required = false) Long autorId, Model model) {
         if (autorId != null) {
             curso.setAutor(autorService.obtenerPorId(autorId));
         }
-        cursoService.editar(curso);
+        try {
+            cursoService.editar(curso);
+        } catch (RuntimeException e) {
+            model.addAttribute("errorMsg", e.getMessage());
+            return "editFormView";
+        }
         errMsg = "Curso editado correctamente";
         return "redirect:/list";
     }

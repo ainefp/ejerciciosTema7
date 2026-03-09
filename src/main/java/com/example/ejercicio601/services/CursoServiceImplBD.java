@@ -59,11 +59,11 @@ public class CursoServiceImplBD implements CursoService {
         return cursoRepository.findByAutorId(autorId);
     }
 
-    private void validarLimiteCoste(Curso curso) throws RuntimeException {
+    private void validarLimiteCoste(Curso curso) {
         Long idAutor = curso.getAutor().getId();
         Double costeTotal = cursoRepository.obtenerSumaCostesPorAutor(idAutor);
         Double limiteCosteTotal = curso.getAutor().getLimiteCostoTotalCursos();
-        
+
         if (costeTotal + curso.getPrecio() > limiteCosteTotal) {
             throw new RuntimeException("El coste total de los cursos de " + curso.getAutor().getNombre() + " no puede superar los " + limiteCosteTotal);
         }

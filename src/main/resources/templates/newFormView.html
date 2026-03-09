@@ -1,87 +1,46 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-  <head th:replace="~{listView :: head}"></head>
-  <body class="p-3">
-    <div class="container">
-      <div th:replace="~{listView :: menu}"></div>
-      <h1 class="mb-3">Nuevo Curso</h1>
-      <form
-        method="post"
-        action="#"
-        th:action="@{/nuevo/submit}"
-        th:object="${curso}"
-        class="row g-3"
-      >
-        <!-- <div class="col-12 col-md-4">
-          <label for="id" class="form-label">ID</label>
-          <input type="text" readonly class="form-control" th:field="*{id}" />
-        </div> -->
-        <div class="col-12 col-md-4">
-          <label for="nombre" class="form-label">Nombre</label>
-          <input
-            type="text"
-            class="form-control"
-            id="nombre"
-            th:field="*{nombre}"
-          />
-        </div>
-        <div class="col-12 col-md-4">
-          <label for="precio" class="form-label">Precio</label>
-          <input
-            type="number"
-            class="form-control"
-            id="precio"
-            th:field="*{precio}"
-          />
-        </div>
+<head th:replace="~{listView :: head}"></head>
+<body class="p-3">
+  <div class="container">
+    <div th:replace="~{listView :: menu}"></div>
+    <h1 class="mb-3">Nuevo Curso</h1>
 
-        <div class="col-12">
-          <label for="autorId" class="form-label">Autor</label>
-          <select name="autorId" id="autorId" class="form-select">
-            <option value="">-- Sin autor --</option>
-            <option th:each="a : ${listaAutores}"
-                    th:value="${a.id}"
-                    th:text="${a.nombre}"></option>
-          </select>
-        </div>
+    <div th:if="${errorMsg}" class="alert alert-danger" role="alert" th:text="${errorMsg}"></div>
+    
+    <form method="post" action="#" th:action="@{/nuevo/submit}" th:object="${curso}" class="row g-3">
+      <div class="col-12 col-md-6">
+        <label for="nombre" class="form-label">Nombre</label>
+        <input type="text" class="form-control" id="nombre" th:field="*{nombre}"/>
+      </div>
+      <div class="col-12 col-md-6">
+        <label for="precio" class="form-label">Precio</label>
+        <input type="number" class="form-control" id="precio" th:field="*{precio}"/>
+      </div>
 
-        <div class="col-12">
-          <label class="form-label d-block">Temática</label>
-          <div
-            class="form-check form-check-inline"
-            th:each="tema : ${T(com.example.ejercicio601.domain.Tematica).values()}"
-          >
-            <input
-              class="form-check-input"
-              type="radio"
-              th:field="*{tematica}"
-              th:value="${tema}"
-              id="tema__${tema}"
-            />
-            <label
-              class="form-check-label"
-              th:for="${'tema__' + tema}"
-              th:text="${tema}"
-              >Tematica</label
-            >
-          </div>
-        </div>
+      <div class="col-12">
+        <label for="autorId" class="form-label">Autor</label>
+        <select name="autorId" id="autorId" class="form-select">
+          <option value="">-- Sin autor --</option>
+          <option th:each="a : ${listaAutores}" th:value="${a.id}" th:selected="${curso.autor != null && curso.autor.id == a.id}" th:text="${a.nombre}"></option>
+        </select>
+      </div>
 
-        <!--
-        <div th:classappend="${#fields.hasErrors('email')} ? 'cssError'">
-        <label>Email:<input type="text" id="email" th:field="*{email}"/>
-        <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="cssError">Error</span>
-        </label>
+      <div class="col-12">
+        <label class="form-label d-block">Temática</label>
+        <div class="form-check form-check-inline" th:each="tema : ${T(com.example.ejercicio601.domain.Tematica).values()}">
+          <input class="form-check-input" type="radio" th:field="*{tematica}" th:value="${tema}"id="tema__${tema}"/>
+          <label class="form-check-label" th:for="${'tema__' + tema}" th:text="${tema}">Tematica</label>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <button type="submit" class="btn btn-success">Crear Curso</button>
+        <a th:href="@{/}" class="btn btn-secondary ms-2">Cancelar</a>
+      </div>
+    </form>
     </div>
-    -->
-
-        <div class="col-12">
-          <button type="submit" class="btn btn-success">Crear Curso</button>
-        </div>
-      </form>
-    </div>
-    <script
-      th:src="@{/webjars/bootstrap/5.3.8/js/bootstrap.bundle.min.js}"
-    ></script>
-  </body>
+    
+  <script th:src="@{/webjars/bootstrap/5.3.8/js/bootstrap.bundle.min.js}"></script>
+</body>
 </html>
