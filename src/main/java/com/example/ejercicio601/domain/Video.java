@@ -26,7 +26,7 @@ public class Video {
 
     private String descripcion;
     private Integer duracionSegundos;
-    private Long idYoutube;
+    private String idYoutube;
 
     @ToString.Exclude
     @ManyToOne
