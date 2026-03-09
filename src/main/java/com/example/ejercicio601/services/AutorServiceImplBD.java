@@ -1,4 +1,4 @@
-package com.example.ejercicio601.repository;
+package com.example.ejercicio601.services;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.ejercicio601.domain.Autor;
-import com.example.ejercicio601.services.AutorService;
+import com.example.ejercicio601.repository.AutorRepository;
 
 @Service
 public class AutorServiceImplBD implements AutorService {

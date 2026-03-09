@@ -1,5 +1,8 @@
 package com.example.ejercicio601.controllers;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,35 +13,47 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.ejercicio601.domain.Autor;
 import com.example.ejercicio601.domain.Curso;
-import com.example.ejercicio601.services.CursoService;
 import com.example.ejercicio601.services.AutorService;
+import com.example.ejercicio601.services.CursoService;
 
 import lombok.RequiredArgsConstructor;
-
 
 @Controller
 @RequiredArgsConstructor
 public class MainController {
 
+    @Autowired
     private final CursoService cursoService;
-    private final AutorService autorService;
-    private String txtMsg;
 
-    @GetMapping({"/", "/list"})
+    @Autowired
+    private final AutorService autorService;
+
+    private String errMsg;
+
+    // Método para asignar la lista de autores a la vista
+    // Es decir, no necesito hacer un model.addAttribute("listaAutores", autorService.obtenerTodos())
+    // Esta variable corresponde a la variable "listaAutores" que se utiliza en el select del formulario
+    @ModelAttribute("listaAutores")
+    public List<Autor> asignarListaAutores() {
+        return autorService.obtenerTodos();
+    }
+
+    // Método para asignar la lista de cursos a la vista
+    @ModelAttribute("listaCursos")
+    public List<Curso> asignarListaCursos() {
+        return cursoService.obtenerTodos();
+    }
+
+    @GetMapping({ "/", "/list" })
     public String showList(Model model) {
-        if (txtMsg != null) {
-            model.addAttribute("msg", txtMsg);
-            txtMsg = null;
+        if (errMsg != null) {
+            model.addAttribute("msg", errMsg);
+            errMsg = null;
         }
-        /*if (err != null){
-            model.addAttribute("msg", txtMsg);
-        }*/
-        model.addAttribute("listaCursos", cursoService.obtenerTodos());
         model.addAttribute("findForm", new Curso());
         model.addAttribute("findTheme", new Curso());
         model.addAttribute("findPrice", new Curso());
         model.addAttribute("findAutor", new Autor());
-        model.addAttribute("listaAutores", autorService.obtenerTodos());
         return "listView";
     }
 
@@ -47,9 +62,9 @@ public class MainController {
         try {
             Curso curso = cursoService.obtenerPorId(id);
             model.addAttribute("curso", curso);
-            
-        } catch(RuntimeException e) {
-            txtMsg = e.getMessage();
+
+        } catch (RuntimeException e) {
+            errMsg = e.getMessage();
             return "redirect:/list";
         }
 
@@ -60,10 +75,9 @@ public class MainController {
     public String showNew(Model model) {
         try {
             model.addAttribute("curso", new Curso());
-            model.addAttribute("listaAutores", autorService.obtenerTodos());
             return "newFormView";
-        } catch(RuntimeException e) {
-            txtMsg = e.getMessage();
+        } catch (RuntimeException e) {
+            errMsg = e.getMessage();
             return "redirect:/list";
         }
     }
@@ -72,14 +86,13 @@ public class MainController {
     public String edit(@PathVariable Long id, Model model) {
         Curso curso = cursoService.obtenerPorId(id);
         model.addAttribute("curso", curso);
-        model.addAttribute("listaAutores", autorService.obtenerTodos());
         return "editFormView";
     }
 
     @GetMapping("/borrar/{id}")
     public String getMethodName(@PathVariable Long id) {
         cursoService.borrar(id);
-        txtMsg = "Curso borrado correctamente";
+        errMsg = "Curso borrado correctamente";
         return "redirect:/list";
     }
 
@@ -89,36 +102,32 @@ public class MainController {
             curso.setAutor(autorService.obtenerPorId(autorId));
         }
         cursoService.añadir(curso);
-        txtMsg = "Curso añadido correctamente";
+        errMsg = "Curso añadido correctamente";
         return "redirect:/list";
     }
-    
+
     @PostMapping("/editar/submit")
     public String submitEdit(@ModelAttribute Curso curso, @RequestParam(required = false) Long autorId) {
         if (autorId != null) {
             curso.setAutor(autorService.obtenerPorId(autorId));
         }
         cursoService.editar(curso);
-        txtMsg = "Curso editado correctamente";
+        errMsg = "Curso editado correctamente";
         return "redirect:/list";
     }
 
     @PostMapping("/findByName")
-    public String findName(Curso curso, Model model) {
+    public String findName(@ModelAttribute("findForm") Curso cursoM, Curso curso, Model model) {
         model.addAttribute("listaCursos", cursoService.buscarPorNombre(curso.getNombre()));
-        model.addAttribute("listaAutores", autorService.obtenerTodos());
-        model.addAttribute("findForm", curso);
         model.addAttribute("findTheme", new Curso());
         model.addAttribute("findPrice", new Curso());
         model.addAttribute("findAutor", new Autor());
         return "listView";
     }
-    
+
     @PostMapping("/findByTheme")
-    public String findTheme(Curso curso, Model model) {
+    public String findTheme(@ModelAttribute("findTheme") Curso cursoM, Curso curso, Model model) {
         model.addAttribute("listaCursos", cursoService.buscarPorTematica(curso.getTematica()));
-        model.addAttribute("listaAutores", autorService.obtenerTodos());
-        model.addAttribute("findTheme", curso);
         model.addAttribute("findForm", new Curso());
         model.addAttribute("findPrice", new Curso());
         model.addAttribute("findAutor", new Autor());
@@ -126,21 +135,17 @@ public class MainController {
     }
 
     @PostMapping("/findByAutor")
-    public String findAutor(Autor autor, Model model) {
+    public String findAutor(@ModelAttribute("findAutor") Autor autorM, Autor autor, Model model) {
         model.addAttribute("listaCursos", cursoService.buscarPorAutor(autor.getId()));
-        model.addAttribute("listaAutores", autorService.obtenerTodos());
-        model.addAttribute("findAutor", autor);
         model.addAttribute("findForm", new Curso());
         model.addAttribute("findTheme", new Curso());
         model.addAttribute("findPrice", new Curso());
         return "listView";
     }
-    
+
     @PostMapping("/findByPrice")
-    public String findPrice(Curso curso, Model model) {
+    public String findPrice(@ModelAttribute("findPrice") Curso cursoM, Curso curso, Model model) {
         model.addAttribute("listaCursos", cursoService.buscarPorPrecioMenor(curso.getPrecio()));
-        model.addAttribute("listaAutores", autorService.obtenerTodos());
-        model.addAttribute("findPrice", curso);
         model.addAttribute("findForm", new Curso());
         model.addAttribute("findTheme", new Curso());
         model.addAttribute("findAutor", new Autor());
