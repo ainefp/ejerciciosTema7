@@ -2,7 +2,6 @@ package com.example.ejercicio601.controllers;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,10 +21,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class MainController {
 
-    @Autowired
     private final CursoService cursoService;
 
-    @Autowired
     private final AutorService autorService;
 
     private String errMsg;
