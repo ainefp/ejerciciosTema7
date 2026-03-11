@@ -59,27 +59,16 @@ public class MainController {
 
     @GetMapping("/{id}")
     public String showElement(@PathVariable Long id, Model model) {
-        try {
-            Curso curso = cursoService.obtenerPorId(id);
-            model.addAttribute("curso", curso);
-
-        } catch (RuntimeException e) {
-            errMsg = e.getMessage();
-            return "redirect:/list";
-        }
+       Curso curso = cursoService.obtenerPorId(id);
+        model.addAttribute("curso", curso);
 
         return "Curso/listOneCursoView";
     }
 
     @GetMapping("/nuevo")
     public String showNew(Model model) {
-        try {
-            model.addAttribute("curso", new Curso());
-            return "Curso/newCursoFormView";
-        } catch (RuntimeException e) {
-            errMsg = e.getMessage();
-            return "redirect:/list";
-        }
+        model.addAttribute("curso", new Curso());
+        return "Curso/newCursoFormView";
     }
 
     @GetMapping("/editar/{id}")
@@ -101,12 +90,7 @@ public class MainController {
         if (autorId != null) {
             curso.setAutor(autorService.obtenerPorId(autorId));
         }
-        try {
-            cursoService.añadir(curso);
-        } catch (RuntimeException e) {
-            model.addAttribute("errorMsg", e.getMessage());
-            return "Curso/newCursoFormView";
-        }
+        cursoService.añadir(curso);
         errMsg = "Curso añadido correctamente";
         return "redirect:/list";
     }
@@ -116,12 +100,7 @@ public class MainController {
         if (autorId != null) {
             curso.setAutor(autorService.obtenerPorId(autorId));
         }
-        try {
-            cursoService.editar(curso);
-        } catch (RuntimeException e) {
-            model.addAttribute("errorMsg", e.getMessage());
-            return "Curso/editCursoFormView";
-        }
+        cursoService.editar(curso);
         errMsg = "Curso editado correctamente";
         return "redirect:/list";
     }

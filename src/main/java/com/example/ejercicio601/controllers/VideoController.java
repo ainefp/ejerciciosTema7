@@ -43,13 +43,8 @@ public class VideoController {
 
     @GetMapping("/{id}")
     public String showElement(@PathVariable Long id, Model model) {
-        try {
-            Video video = videoService.obtenerPorId(id);
-            model.addAttribute("video", video);
-        } catch (RuntimeException e) {
-            errMsg = e.getMessage();
-            return "redirect:/videos";
-        }
+        Video video = videoService.obtenerPorId(id);
+        model.addAttribute("video", video);
         return "Video/listOneVideoView";
     }
 

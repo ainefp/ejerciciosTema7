@@ -14,11 +14,14 @@ public class VideoServiceImplBD implements VideoService {
     @Autowired
     private VideoRepository videoRepository;
 
-    public Video añadir(Video video) {
+    public Video añadir(Video video) throws RuntimeException {
+        if (video.getId() != null && videoRepository.existsById(video.getId())) {
+            throw new RuntimeException("El video ya existe con id: " + video.getId());
+        }
         return videoRepository.save(video);
     }
 
-    public List<Video> obtenerTodos() {
+    public List<Video> obtenerTodos() throws RuntimeException {
         return videoRepository.findAll();
     }
 
@@ -26,11 +29,12 @@ public class VideoServiceImplBD implements VideoService {
         return videoRepository.findById(id).orElseThrow(() -> new RuntimeException("Video no encontrado con este id: " + id));
     }
 
-    public Video editar(Video video) {
+    public Video editar(Video video) throws RuntimeException {
+        obtenerPorId(video.getId());
         return videoRepository.save(video);
     }
 
-    public void borrar(Long id) {
+    public void borrar(Long id) throws RuntimeException {
         obtenerPorId(id);
         videoRepository.deleteById(id);
     }

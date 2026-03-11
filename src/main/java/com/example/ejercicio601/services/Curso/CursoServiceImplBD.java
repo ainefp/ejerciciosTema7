@@ -16,12 +16,15 @@ public class CursoServiceImplBD implements CursoService {
     @Autowired
     private CursoRepository cursoRepository;
     
-    public Curso añadir(Curso curso) {
+    public Curso añadir(Curso curso) throws RuntimeException {
+        if (curso.getId() != null && cursoRepository.existsById(curso.getId())) {
+            throw new RuntimeException("El curso ya existe con id: " + curso.getId());
+        }
         validarLimiteCoste(curso);
         return cursoRepository.save(curso);
     }
     
-    public List<Curso> obtenerTodos() {
+    public List<Curso> obtenerTodos() throws RuntimeException {
         return cursoRepository.findAll();
     }
 
@@ -30,12 +33,13 @@ public class CursoServiceImplBD implements CursoService {
         return cursoRepository.findById(id).orElseThrow(() -> new RuntimeException("Curso no encontrado con este id: " + id));
     }
 
-    public Curso editar(Curso curso) {
+    public Curso editar(Curso curso) throws RuntimeException {
+        obtenerPorId(curso.getId());
         validarLimiteCoste(curso);
         return cursoRepository.save(curso);
     }
 
-    public void borrar(Long id) {
+    public void borrar(Long id) throws RuntimeException {
         obtenerPorId(id);
         cursoRepository.deleteById(id);
     }
@@ -60,7 +64,7 @@ public class CursoServiceImplBD implements CursoService {
         return cursoRepository.findByAutorId(autorId);
     }
 
-    private void validarLimiteCoste(Curso curso) {
+    private void validarLimiteCoste(Curso curso) throws RuntimeException {
         Long idAutor = curso.getAutor().getId();
         Double costeTotal = cursoRepository.obtenerSumaCostesPorAutor(idAutor);
         Double limiteCosteTotal = curso.getAutor().getLimiteCostoTotalCursos();

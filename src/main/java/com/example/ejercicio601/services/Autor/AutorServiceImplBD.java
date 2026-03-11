@@ -14,7 +14,10 @@ public class AutorServiceImplBD implements AutorService {
     @Autowired
     private AutorRepository autorRepository;
 
-    public Autor añadir(Autor autor) {
+    public Autor añadir(Autor autor) throws RuntimeException {
+        if (autor.getId() != null && autorRepository.existsById(autor.getId())) {
+            throw new RuntimeException("El autor ya existe con id: " + autor.getId());
+        }
         return autorRepository.save(autor);
     }
 
@@ -26,11 +29,12 @@ public class AutorServiceImplBD implements AutorService {
         return autorRepository.findById(id).orElseThrow(() -> new RuntimeException("Autor no encontrado con este id: " + id));
     }
 
-    public Autor editar(Autor autor) {
+    public Autor editar(Autor autor) throws RuntimeException {
+        obtenerPorId(autor.getId());
         return autorRepository.save(autor);
     }
 
-    public void borrar(Long id) {
+    public void borrar(Long id) throws RuntimeException {
         obtenerPorId(id);
         autorRepository.deleteById(id);
     }

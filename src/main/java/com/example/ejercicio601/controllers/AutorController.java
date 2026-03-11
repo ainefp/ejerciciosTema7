@@ -35,13 +35,8 @@ public class AutorController {
 
     @GetMapping("/{id}")
     public String showElement(@PathVariable Long id, Model model) {
-        try {
-            Autor autor = autorService.obtenerPorId(id);
-            model.addAttribute("autor", autor);
-        } catch (RuntimeException e) {
-            errMsg = e.getMessage();
-            return "redirect:/autores";
-        }
+        Autor autor = autorService.obtenerPorId(id);
+        model.addAttribute("autor", autor);
         return "Autor/listOneAutorView";
     }
 
