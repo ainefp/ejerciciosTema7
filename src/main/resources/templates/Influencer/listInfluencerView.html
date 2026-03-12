@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{Curso/listCursoView :: head}"></head>
+<body class="p-3">
+    <div class="container">
+        <div th:replace="~{Curso/listCursoView :: menu}"></div>
+        <h1 class="mb-3">Lista de Videos</h1>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Descripción</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="influencer : ${listaInfluencers}">
+                    <td th:text="${influencer.id}">ID</td>
+                    <td><a th:href="@{/influencers/{id}(id=${influencer.id})}" th:text="${influencer.UsrIgrm}">Usuario de Instagram</a></td>
+                    <td>
+                        <a th:href="@{/influencers/editar/{id}(id=${influencer.id})}" class="btn btn-primary btn-sm">Editar</a>
+                        <a th:href="@{/influencers/borrar/{id}(id=${influencer.id})}" class="btn btn-outline-danger btn-sm ms-2">Borrar</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p th:if="${msg != null}" class="alert alert-info" role="alert">
+            <span th:text="${msg}"></span>
+        </p>
+
+        <div class="d-flex gap-2">
+            <a th:href="@{/influencers/nuevo}" class="btn btn-success">Nuevo Influencer</a>
+        </div>
+    </div>
+    <script th:src="@{/webjars/bootstrap/5.3.8/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

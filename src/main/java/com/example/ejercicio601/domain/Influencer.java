@@ -22,5 +22,5 @@ public class Influencer {
     private Long id;
 
     @NotEmpty
-    private String nombreUsuarioIgrm;
+    private String UsrIgrm;
 }
