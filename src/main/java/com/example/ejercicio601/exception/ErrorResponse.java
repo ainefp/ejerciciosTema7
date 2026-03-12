@@ -1,4 +1,4 @@
-package com.example.ejercicio601.dto;
+package com.example.ejercicio601.exception;
 
 import java.time.LocalDateTime;
 

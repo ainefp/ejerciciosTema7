@@ -79,7 +79,7 @@
     </table>
 
     <!-- MENSAJE DE ERROR -->
-    <p th:if="${msg!=null}" class="alert alert-info" role="alert"><span th:text="${msg}">err</span></p>
+    <p th:if="${errorMsg!=null}" class="alert alert-info" role="alert"><span th:text="${errorMsg}">err</span></p>
     
     <!-- NUEVO CURSO -->
     <a th:href="@{/nuevo}" class="btn btn-success">Nuevo Curso</a>

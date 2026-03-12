@@ -1,4 +1,7 @@
 ### Modificaciones para el ejercicio
 - Implementar ControllerAdvice
-  - Generar fichero con fecha, tipoError y mensaje
-  - `LocalDateTime.now()`, `getClass` y `getMessage`
+  - Excepciones personalizadas
+  - Mensajes de error a la vista
+  - Crear ficheros para guardarlas
+    - `LocalDateTime.now()`, `getClass` y `getMessage`
+- Terminar 7.5
