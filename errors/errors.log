@@ -1,0 +1,8 @@
+2026-03-15T22:04:42.173929800 | MethodArgumentTypeMismatchException | Method parameter 'id': Failed to convert value of type 'java.lang.String' to required type 'java.lang.Long'; For input string: "favicon.ico"
+2026-03-15T22:04:45.645931400 | MethodArgumentTypeMismatchException | Method parameter 'id': Failed to convert value of type 'java.lang.String' to required type 'java.lang.Long'; For input string: "favicon.ico"
+2026-03-15T22:04:49.071003500 | ArchivoNoEncontradoException | Autor no encontrado con este id: 6
+2026-03-15T22:04:49.142007400 | MethodArgumentTypeMismatchException | Method parameter 'id': Failed to convert value of type 'java.lang.String' to required type 'java.lang.Long'; For input string: "favicon.ico"
+2026-03-15T22:04:52.839514400 | MethodArgumentTypeMismatchException | Method parameter 'id': Failed to convert value of type 'java.lang.String' to required type 'java.lang.Long'; For input string: "favicon.ico"
+2026-03-15T22:04:55.254924100 | MethodArgumentTypeMismatchException | Method parameter 'id': Failed to convert value of type 'java.lang.String' to required type 'java.lang.Long'; For input string: "favicon.ico"
+2026-03-15T22:04:59.532551900 | RuntimeException | El coste total de los cursos de Ainé Figueroa no puede superar los 150.0
+2026-03-15T22:04:59.609551800 | MethodArgumentTypeMismatchException | Method parameter 'id': Failed to convert value of type 'java.lang.String' to required type 'java.lang.Long'; For input string: "favicon.ico"

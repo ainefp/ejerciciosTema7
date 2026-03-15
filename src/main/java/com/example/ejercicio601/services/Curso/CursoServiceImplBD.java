@@ -7,7 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.example.ejercicio601.domain.Curso;
 import com.example.ejercicio601.domain.Tematica;
-import com.example.ejercicio601.domain.Video;
+import com.example.ejercicio601.exception.ArchivoDuplicadoException;
+import com.example.ejercicio601.exception.ArchivoNoEncontradoException;
 import com.example.ejercicio601.repository.CursoRepository;
 
 
@@ -18,7 +19,7 @@ public class CursoServiceImplBD implements CursoService {
     
     public Curso añadir(Curso curso) throws RuntimeException {
         if (curso.getId() != null && cursoRepository.existsById(curso.getId())) {
-            throw new RuntimeException("El curso ya existe con id: " + curso.getId());
+            throw new ArchivoDuplicadoException("El curso ya existe con id: " + curso.getId());
         }
         validarLimiteCoste(curso);
         return cursoRepository.save(curso);
@@ -30,7 +31,7 @@ public class CursoServiceImplBD implements CursoService {
 
     
     public Curso obtenerPorId(Long id) throws RuntimeException {
-        return cursoRepository.findById(id).orElseThrow(() -> new RuntimeException("Curso no encontrado con este id: " + id));
+        return cursoRepository.findById(id).orElseThrow(() -> new ArchivoNoEncontradoException("Curso no encontrado con este id: " + id));
     }
 
     public Curso editar(Curso curso) throws RuntimeException {

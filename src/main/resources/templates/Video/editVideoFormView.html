@@ -7,6 +7,8 @@
 
         <h1 class="mb-3">Editar Video</h1>
         <form method="post" action="#" th:action="@{/videos/editar/submit}" th:object="${video}" class="row g-3">
+            <input type="hidden" th:field="*{id}" />
+
             <div class="col-12 col-md-6">
                 <label for="descripcion" class="form-label">Descripción</label>
                 <input type="text" class="form-control" id="descripcion" th:field="*{descripcion}" />

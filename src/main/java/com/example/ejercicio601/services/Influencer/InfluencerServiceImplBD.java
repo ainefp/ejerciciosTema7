@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.ejercicio601.domain.Influencer;
+import com.example.ejercicio601.exception.ArchivoDuplicadoException;
+import com.example.ejercicio601.exception.ArchivoNoEncontradoException;
 import com.example.ejercicio601.repository.InfluencerRepository;
 
 @Service
@@ -16,7 +18,7 @@ public class InfluencerServiceImplBD implements InfluencerService {
 
     public Influencer añadir(Influencer influencer) throws RuntimeException {
         if (influencer.getId() != null && influencerRepository.existsById(influencer.getId())) {
-            throw new RuntimeException("El influencer ya existe con id: " + influencer.getId());
+            throw new ArchivoDuplicadoException("El influencer ya existe con id: " + influencer.getId());
         }
         return influencerRepository.save(influencer);
     }
@@ -26,7 +28,7 @@ public class InfluencerServiceImplBD implements InfluencerService {
     }
 
     public Influencer obtenerPorId(Long id) throws RuntimeException {
-        return influencerRepository.findById(id).orElseThrow(() -> new RuntimeException("Influencer no encontrado con este id: " + id));
+        return influencerRepository.findById(id).orElseThrow(() -> new ArchivoNoEncontradoException("Influencer no encontrado con este id: " + id));
     }
 
     public Influencer editar(Influencer influencer) throws RuntimeException {

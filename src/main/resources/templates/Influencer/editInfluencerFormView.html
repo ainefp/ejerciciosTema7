@@ -7,6 +7,8 @@
 
         <h1 class="mb-3">Editar Influencer</h1>
         <form method="post" action="#" th:action="@{/influencers/editar/submit}" th:object="${influencer}" class="row g-3">
+            <input type="hidden" th:field="*{id}" />
+
             <div class="col-12 col-md-6">
                 <label for="UsrIgrm" class="form-label">Usuario de Instagram</label>
                 <input type="text" class="form-control" id="UsrIgrm" th:field="*{UsrIgrm}" />

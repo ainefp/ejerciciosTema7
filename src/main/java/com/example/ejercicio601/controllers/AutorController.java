@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.ejercicio601.domain.Autor;
@@ -22,7 +23,10 @@ public class AutorController {
     private String errMsg;
 
     @GetMapping({"", "/"})
-    public String showList(Model model) {
+    public String showList(Model model, @RequestParam(required = false) String errorMsg) {
+        if (errorMsg != null && !errorMsg.isBlank()) {
+            model.addAttribute("errorMsg", errorMsg);
+        }
         if (errMsg != null) { 
             model.addAttribute("msg", errMsg);
             errMsg = null;

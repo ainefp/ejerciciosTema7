@@ -42,7 +42,10 @@ public class MainController {
     }
 
     @GetMapping({ "/", "/list" })
-    public String showList(Model model) {
+    public String showList(Model model, @RequestParam(required = false) String errorMsg) {
+        if (errorMsg != null && !errorMsg.isBlank()) {
+            model.addAttribute("errorMsg", errorMsg);
+        }
         if (errMsg != null) {
             model.addAttribute("msg", errMsg);
             errMsg = null;

@@ -6,6 +6,8 @@
         <div th:replace="~{Curso/listCursoView :: menu}"></div>
         <h1 class="mb-3">Editar Autor</h1>
         <form method="post" action="#" th:action="@{/autores/editar/submit}" th:object="${autor}" class="row g-3">
+            <input type="hidden" th:field="*{id}" />
+
             <div class="col-12 col-md-6">
                 <label for="nombre" class="form-label">Nombre</label>
                 <input type="text" class="form-control" id="nombre" th:field="*{nombre}" />
