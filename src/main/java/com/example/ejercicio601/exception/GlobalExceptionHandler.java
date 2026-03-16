@@ -1,21 +1,25 @@
 package com.example.ejercicio601.exception;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.time.LocalDateTime;
-import java.net.URLEncoder;
 
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
+    // mover a application.properties
+    // @Value("${FICHERO_ERRORES}")
+    // private String rutaFicheroErrores;
     private static final Path FICHERO_ERRORES = Paths.get("errors/errors.log");
     
     // Excepciones generalizadas

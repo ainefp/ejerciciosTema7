@@ -37,7 +37,7 @@ public class Main {
 			Influencer i2_tati = influencerService.añadir(new Influencer(null, "tatiana__lopez42"));
 			Influencer i3_paqui = influencerService.añadir(new Influencer(null, "paquitaa000"));
 
-			// Crear Cursos + Crear Videos
+			// Crear Cursos + Crear Videos + Meter Influencers
 			Curso programacion = new Curso(null, "Programación", 50.0, Tematica.PROGRAMACION, a1_aine, null, null);
 			programacion.setVideos(List.of(
 				new Video(null, "Introducción a la Programación", 30000, "nLJhIpKNOSo", programacion),
