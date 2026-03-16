@@ -17,7 +17,6 @@ import jakarta.servlet.http.HttpServletRequest;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    // mover a application.properties
     // @Value("${FICHERO_ERRORES}")
     // private String rutaFicheroErrores;
     private static final Path FICHERO_ERRORES = Paths.get("errores/errors.log");

@@ -25,5 +25,4 @@ public class Promocion {
     @ManyToOne
     private Influencer influencer;
 
-    private Double remuneracion;
 }
