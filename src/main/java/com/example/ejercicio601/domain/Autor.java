@@ -35,7 +35,7 @@ public class Autor {
     @NotEmpty
     private String email;
 
-    // No es necesario que sea bidireccional
+    // No es necesario que sea bidireccional, está implementado para que resulte más fácil imprimirlos en la vista
     @OneToMany(mappedBy = "autor")
     private List<Curso> cursos;
 

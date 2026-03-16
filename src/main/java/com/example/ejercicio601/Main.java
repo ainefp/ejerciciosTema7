@@ -45,7 +45,8 @@ public class Main {
 				new Video(null, "Java Avanzado", 40000, "nLJhIpKNOSo", programacion)
 			));
 			programacion.setInfluencers(List.of(
-				new Promocion(null, programacion, i1_joaqui, 100.0)
+				new Promocion(null, programacion, i1_joaqui),
+				new Promocion(null, programacion, i2_tati)
 			));
 			
 			Curso redes = new Curso(null, "Redes Locales", 75.0, Tematica.REDES, a1_aine, null, null);
@@ -54,7 +55,7 @@ public class Main {
 				new Video(null, "DNS y DHCP", 25000, "nLJhIpKNOSo", redes)
 			));
 			redes.setInfluencers(List.of(
-				new Promocion(null, redes, i2_tati, 150.0)
+				new Promocion(null, redes, i2_tati)
 			));
 
 			Curso sistemas = new Curso(null, "Sistemas Informáticos", 60.0, Tematica.SISTEMAS, a2_juan, null, null);
@@ -62,7 +63,7 @@ public class Main {
 				new Video(null, "Sistemas Informáticos para Principiantes", 20000, "nLJhIpKNOSo", sistemas)
 			));
 			sistemas.setInfluencers(List.of(
-				new Promocion(null, sistemas, i3_paqui, 120.0)
+				new Promocion(null, sistemas, i3_paqui)
 			));
 
 			// Añadir Cursos
