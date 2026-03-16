@@ -1,6 +1,8 @@
 package com.example.ejercicio601.controllers;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,7 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.ejercicio601.domain.Curso;
 import com.example.ejercicio601.domain.Influencer;
+import com.example.ejercicio601.repository.PromocionRepository;
 import com.example.ejercicio601.services.Influencer.InfluencerService;
 
 import lombok.RequiredArgsConstructor;
@@ -21,6 +25,7 @@ import lombok.RequiredArgsConstructor;
 public class InfluencerController {
 
     private final InfluencerService influencerService;
+    private final PromocionRepository promocionRepository;
 
     private String errMsg;
 
@@ -45,7 +50,14 @@ public class InfluencerController {
     @GetMapping("/{id}")
     public String showElement(@PathVariable Long id, Model model) {
         Influencer influencer = influencerService.obtenerPorId(id);
+        List<Curso> cursosAsociados = promocionRepository.findByInfluencerId(id)
+            .stream()
+            .map(promocion -> promocion.getCurso())
+            .distinct()
+            .collect(Collectors.toList());
+
         model.addAttribute("influencer", influencer);
+        model.addAttribute("cursosAsociados", cursosAsociados);
         return "Influencer/listOneInfluencerView";
     }
 

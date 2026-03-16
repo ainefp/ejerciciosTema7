@@ -11,14 +11,20 @@
                 <tr>
                     <th>ID</th>
                     <th>Usuario de Instagram</th>
-                    <!-- <th>Curso Asociado</th> -->
+                    <th>Cursos Asociados</th>
                 </tr>
             </thead>
             <tbody class="align-middle">
                 <tr>
                     <td th:text="${influencer.id}">ID</td>
                     <td th:text="${influencer.UsrIgrm}">Usuario de Instagram</td>
-                    <!-- <td><a th:href="@{/{id}(id=${influencer.curso.id})}" th:text="${influencer.curso.nombre}">Curso Asociado</a></td> -->
+                    <td>
+                        <ul class="ps-0 mb-0 list-unstyled">
+                            <li th:each="curso : ${cursosAsociados}">
+                                <a th:href="@{/{id}(id=${curso.id})}" th:text="${curso.nombre}">Curso Asociado</a>
+                            </li>
+                        </ul>
+                    </td>
                 </tr>
             </tbody>
         </table>

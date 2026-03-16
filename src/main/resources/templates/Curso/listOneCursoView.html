@@ -13,6 +13,7 @@
                     <th>Autor</th>
                     <th>Tematica</th>
                     <th>Vídeos Asociados</th>
+                    <th>Influencers Asociados</th>
                 </tr>
             </thead>
             <tbody>
@@ -27,6 +28,13 @@
                             <li th:each="video : ${cur.videos}"><a th:href="@{/videos/{id}(id=${video.id})}" th:text="${video.descripcion}"></a></li>
                         </ul>
                         <!-- list-unstyled -->
+                    </td>
+                    <td>
+                        <ul class="ps-0 mb-0 list-unstyled">
+                            <li th:each="promocion : ${cur.influencers}">
+                                <a th:href="@{/influencers/{id}(id=${promocion.influencer.id})}" th:text="${promocion.influencer.usrIgrm}"></a>
+                            </li>
+                        </ul>
                     </td>
                 </tr>
             </tbody>
