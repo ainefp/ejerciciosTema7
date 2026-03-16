@@ -20,7 +20,7 @@ public class GlobalExceptionHandler {
     // mover a application.properties
     // @Value("${FICHERO_ERRORES}")
     // private String rutaFicheroErrores;
-    private static final Path FICHERO_ERRORES = Paths.get("errors/errors.log");
+    private static final Path FICHERO_ERRORES = Paths.get("errores/errors.log");
     
     // Excepciones generalizadas
     @ExceptionHandler(RuntimeException.class)
@@ -46,6 +46,7 @@ public class GlobalExceptionHandler {
         return redireccionConError(request, error.getMsg());
     }
 
+    // Le pasa el error a la vista correspondiente
     private String redireccionConError(HttpServletRequest request, String mensaje) {
         String uri = request.getRequestURI();
         String destino = "/list";
@@ -62,6 +63,7 @@ public class GlobalExceptionHandler {
         return "redirect:" + destino + "?errorMsg=" + msgCodificado;
     }
 
+    // Registra el error en el archivo de errores
     private void registrarError(ErrorResponse error) {
         try {
             Files.createDirectories(FICHERO_ERRORES.getParent());
