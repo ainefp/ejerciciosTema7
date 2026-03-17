@@ -57,7 +57,7 @@ public class MainController {
         return "Curso/listCursoView";
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{id:\\d+}")
     public String showElement(@PathVariable Long id, Model model) {
        Curso curso = cursoService.obtenerPorId(id);
         model.addAttribute("curso", curso);
