@@ -15,7 +15,7 @@
                     <th>Acciones</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="align-middle">
                 <tr th:each="autor : ${listaAutores}">
                     <td th:text="${autor.id}">ID</td>
                     <td><a th:href="@{/autores/{id}(id=${autor.id})}" th:text="${autor.nombre}"></a></td>

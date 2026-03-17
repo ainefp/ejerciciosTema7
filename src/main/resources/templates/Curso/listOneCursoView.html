@@ -16,18 +16,17 @@
                     <th>Influencers Asociados</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="align-middle">
                 <tr th:each="cur : ${curso}">
                     <td th:text="${cur.id}">ID</td>
-                    <td><a th:href="@{/{id}(id=${cur.id})}" th:text="${cur.nombre}">Nombre</a></td>
+                    <td th:text="${cur.nombre}">Nombre</td>
                     <td th:text="${cur.precio}">Precio</td>
                     <td><a th:href="@{/autores/{id}(id=${cur.autor.id})}" th:text="${cur.autor.nombre}">Autor</a></td>
                     <td th:text="${cur.tematica}">Tematica</td>
                     <td>
-                        <ul class="ps-0 mb-0">
+                        <ul class="ps-0 mb-0 list-unstyled">
                             <li th:each="video : ${cur.videos}"><a th:href="@{/videos/{id}(id=${video.id})}" th:text="${video.descripcion}"></a></li>
                         </ul>
-                        <!-- list-unstyled -->
                     </td>
                     <td>
                         <ul class="ps-0 mb-0 list-unstyled">

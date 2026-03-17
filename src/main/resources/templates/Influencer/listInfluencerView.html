@@ -14,7 +14,7 @@
                     <th>Acciones</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="align-middle">
                 <tr th:each="influencer : ${listaInfluencers}">
                     <td th:text="${influencer.id}">ID</td>
                     <td><a th:href="@{/influencers/{id}(id=${influencer.id})}" th:text="${influencer.UsrIgrm}">Usuario de Instagram</a></td>

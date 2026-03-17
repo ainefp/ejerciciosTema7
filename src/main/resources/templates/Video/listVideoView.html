@@ -16,7 +16,7 @@
                     <th>Acciones</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="align-middle">
                 <tr th:each="video : ${listaVideos}">
                     <td th:text="${video.id}">ID</td>
                     <td><a th:href="@{/videos/{id}(id=${video.id})}" th:text="${video.descripcion}">Descripción</a></td>

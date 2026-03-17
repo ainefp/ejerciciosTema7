@@ -64,7 +64,7 @@
                 <th>Acciones</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="align-middle">
             <tr th:each="curso : ${listaCursos}">
                 <td th:text="${curso.id}">ID</td>
                 <td><a th:href="@{/{id}(id=${curso.id})}" th:text="${curso.nombre}"></a></td>
