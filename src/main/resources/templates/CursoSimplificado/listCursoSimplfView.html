@@ -24,10 +24,10 @@
         </table>
 
         <div>
-            <a th:href="@{/pagIni}" class="btn btn-secondary">Pág Inicial</a>
-            <a th:href="@{/pagAnt}" class="btn btn-primary ms-2">Pág ant</a>
-            <a th:href="@{/pagSig}" class="btn btn-primary ms-2">Pág sig</a>
-            <a th:href="@{/pagFin}" class="btn btn-secondary ms-2">Pág Final</a>
+            <a th:href="@{/cursoSimplificado(numPag=0)}" class="btn btn-secondary">Pág Inicial</a>
+            <a th:href="@{/cursoSimplificado(numPag=${pagAnt})}" class="btn btn-primary ms-2">Pág ant</a>
+            <a th:href="@{/cursoSimplificado(numPag=${pagSig})}" class="btn btn-primary ms-2">Pág sig</a>
+            <a th:href="@{/cursoSimplificado(numPag=${pagFin})}" class="btn btn-secondary ms-2">Pág Final</a>
         </div>
 
         <p th:if="${errorMsg!=null}" class="alert alert-info" role="alert"><span th:text="${errorMsg}">err</span></p>
