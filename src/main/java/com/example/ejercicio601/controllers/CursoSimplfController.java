@@ -21,6 +21,7 @@ public class CursoSimplfController {
 
     @GetMapping({"", "/"})
     public String showList(@RequestParam(required = false) String errorMsg, @RequestParam(required = false) Integer numPag, Model model) {
+        
         int pagFin = cursoSimplfService.getTotalPaginas() - 1;
         if (numPag == null || numPag < 0 || numPag > pagFin) numPag = 0;
         Integer pagSig = pagFin > numPag ? numPag + 1 : pagFin;
