@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import com.example.ejercicio601.domain.CursoSimplificado;
 import com.example.ejercicio601.exception.ArchivoDuplicadoException;
-import com.example.ejercicio601.exception.ArchivoNoEncontradoException;
 import com.example.ejercicio601.repository.CursoSimplfRepository;
 
 
@@ -29,16 +28,8 @@ public class CursoSimplfServiceImplBD implements CursoSimplfService {
         return cursoSimplfRepository.save(cursoSimplificado);
     }
 
-    public List<CursoSimplificado> obtenerTodos() throws RuntimeException {
-        return cursoSimplfRepository.findAll();
-    }
-
-    public CursoSimplificado obtenerPorId(Long id) throws RuntimeException {
-        return cursoSimplfRepository.findById(id).orElseThrow(() -> new ArchivoNoEncontradoException("Curso no encontrado con este id: " + id));
-    }
-
     public int getTotalPaginas() {
-        Pageable paging = PageRequest.of(0, PAGE_SIZE, Sort.by("id").descending());
+        Pageable paging = PageRequest.of(0, PAGE_SIZE, Sort.by("id"));
         Page<CursoSimplificado> pagedResult = cursoSimplfRepository.findAll(paging);
         return pagedResult.getTotalPages();
     }
