@@ -10,7 +10,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.example.ejercicio601.domain.CursoSimplificado;
-import com.example.ejercicio601.exception.ArchivoDuplicadoException;
 import com.example.ejercicio601.repository.CursoSimplfRepository;
 
 
@@ -20,13 +19,6 @@ public class CursoSimplfServiceImplBD implements CursoSimplfService {
     CursoSimplfRepository cursoSimplfRepository;
 
     private final Integer PAGE_SIZE = 10;
-
-    public CursoSimplificado añadir(CursoSimplificado cursoSimplificado) throws RuntimeException {
-        if (cursoSimplificado.getId() != null && cursoSimplfRepository.existsById(cursoSimplificado.getId())) {
-            throw new ArchivoDuplicadoException("El curso ya existe con id: " + cursoSimplificado.getId());
-        }
-        return cursoSimplfRepository.save(cursoSimplificado);
-    }
 
     public int getTotalPaginas() {
         Pageable paging = PageRequest.of(0, PAGE_SIZE, Sort.by("id"));
