@@ -5,11 +5,9 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.time.LocalDateTime;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -18,12 +16,7 @@ import jakarta.servlet.http.HttpServletRequest;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    private final Path FICHERO_ERRORES;
-
-    // Cogemos la variable FICHERO_ERRORES del application.properties
-    public GlobalExceptionHandler(@Value("${FICHERO_ERRORES}") String rutaFicheroErrores) {
-        this.FICHERO_ERRORES = Paths.get(rutaFicheroErrores);
-    }
+    private static Path FICHERO_ERRORES;
     
     // Excepciones generalizadas
     @ExceptionHandler(RuntimeException.class)
@@ -75,5 +68,9 @@ public class GlobalExceptionHandler {
         } catch (IOException e) {
             // Manejar la excepción sin interrumpir el flujo normal
         }
+    }
+
+    public static void setFicheroErrores(Path ruta) {
+        FICHERO_ERRORES = ruta;
     }
 }
